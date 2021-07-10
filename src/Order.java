@@ -12,7 +12,7 @@ public class Order {
     // private variables
     private boolean validDate = true;
     private boolean altValidDate = true;
-    private boolean altDateChoose = true;
+    private boolean altDateChoose;
     private int productId;
     private int deliveryDay;
     private int deliveryMonth;
@@ -20,7 +20,6 @@ public class Order {
     private int altDeliveryDay;
     private int altDeliveryMonth;
     private int altDeliveryYear;
-
     //Constructors
     public Order(int[] inputs){
         // takes the values from an array to input dates and the product id
@@ -38,6 +37,11 @@ public class Order {
 
        // product Id
        setProductId(inputs[3]);
+       if(inputs[7] == 1){
+           altDateChoose = true;
+       }else{
+           altDateChoose = false;
+       }
     }
     public Order(){
         this.validDate = false;
@@ -112,10 +116,14 @@ public class Order {
     }
     public String getDeliveryMonthName(){
         // uses an array to return a string corresponding to the integer value of delivery month
-        int temp = getDeliveryMonth();
-        String[] months = {"January", "February", "March", "April","May","June","July","August","September","October",
-        "November", "December"};
-        return months[getDeliveryMonth()-1];
+        if(getDeliveryMonth() <= 12) {
+            int temp = getDeliveryMonth();
+            String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+                    "November", "December"};
+            return months[getDeliveryMonth() - 1];
+        }else{
+            return "invalid month";
+        }
     }
     public int getDeliveryYear() {
         return deliveryYear;
@@ -140,10 +148,18 @@ public class Order {
     }
     public String getAltDeliveryMonthName(){
         // uses an array to return a string corresponding to the integer value of alt delivery month
-        int temp = getAltDeliveryMonth();
-        String[] months = {"January", "February", "March", "April","May","June","July","August","September","October",
-                "November", "December"};
-        return months[getAltDeliveryMonth()-1];
+        if(getAltDeliveryMonth() <= 12) {
+            if(getAltDateChoose()){
+            int temp = getAltDeliveryMonth();
+            String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+                    "November", "December"};
+            return months[getAltDeliveryMonth() - 1];
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
     }
     public void setAltDateChoose(boolean altDateChoose){
         this.altDateChoose = altDateChoose;
@@ -168,10 +184,10 @@ public class Order {
         day = input.nextInt();
         System.out.println("Please enter the year of delivery");
         year = input.nextInt();
-
         int choice;
         System.out.println("Would you like to enter an alternate delivery date? (1)Yes (2)No");
         choice = input.nextInt();
+        int altDateChooseInt;
         if(choice == 1){
             System.out.println("Please enter the alternate month of delivery");
             altMonth = input.nextInt();
@@ -179,9 +195,10 @@ public class Order {
             altDay = input.nextInt();
             System.out.println("Please enter the alternate year of delivery");
             altYear = input.nextInt();
-        }else { setAltDateChoose(false);
+            altDateChooseInt = 1;
+        }else { altDateChooseInt = 2;
         }
-        int[] userInputs = {month,day,year,productId,altMonth,altDay,altYear};
+        int[] userInputs = {month,day,year,productId,altMonth,altDay,altYear,altDateChooseInt};
         return userInputs;
     }
     public void summary(){
