@@ -233,7 +233,8 @@ public class Order {
             System.out.println("Congratulations! Your delivery date of " + getDeliveryMonthName() + " " + getDeliveryDay()
             + "," + getDeliveryYear() + " has been confirmed ");
         }else if(getAltValidDate() && confirm == 1){
-            System.out.println("\nCongratulations! Your delivery date of " + getAltDeliveryMonthName() + " ");
+            System.out.println("\nCongratulations! Your delivery date of " + getAltDeliveryMonthName() + " " + getAltDeliveryDay() +
+                    "," + getAltDeliveryYear() + " has been confirmed");
         }else{
             System.out.println("\nDelivery not confirmed, please check back later to schedule one.");
         }
