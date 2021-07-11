@@ -78,19 +78,19 @@ public class Order {
         return valid;
     }
     public boolean getValidDate() {
+        // returns true if the primary date is valid
         return validDate;
     }
     public boolean getAltValidDate(){
+        // returns true if the alternate date is valid
         return altValidDate;
     }
     public void setProductId(int productId) {
+        // sets the productId to the argument(1-5)
         this.productId = productId;
     }
-    public int getProductId() {
-        //DEBUG ONLY REMOVE BEFORE SUBMISSION
-        return productId;
-    }
     public String getProductName() {
+        // returns the product name given the productID (must be used after productID is set)
         int temp = productId;
         if(temp > 0) {
             String[] names = {"Antivirus Software Standard Edition 2021", "Antivirus Software Enterprise Edition 2021", "Password Manager and 2FA Software",
@@ -100,18 +100,23 @@ public class Order {
         return "invalid";
     }
     public void setDeliveryDay(int deliveryDay){
+        // sets primary day of delivery
         this.deliveryDay = deliveryDay;
     }
     public void setDeliveryMonth(int deliveryMonth){
+        // sets primary month of delivery
         this.deliveryMonth = deliveryMonth;
     }
     public void setDeliveryYear(int deliveryYear){
+        // sets primary year of delivery
         this.deliveryYear = deliveryYear;
     }
     public int getDeliveryDay() {
+        // returns the primary delivery day
         return deliveryDay;
     }
     public int getDeliveryMonth() {
+        // returns the primary delivery month
         return deliveryMonth;
     }
     public String getDeliveryMonthName(){
@@ -126,24 +131,31 @@ public class Order {
         }
     }
     public int getDeliveryYear() {
+        // returns the primary delivery month
         return deliveryYear;
     }
     public void setAltDeliveryDay(int altDeliveryDay){
+        // sets the alternate delivery day
         this.altDeliveryDay = altDeliveryDay;
     }
     public void setAltDeliveryMonth(int altDeliveryMonth){
+        // sets the alternate delivery month
         this.altDeliveryMonth = altDeliveryMonth;
     }
     public void setAltDeliveryYear(int altDeliveryYear){
+        // sets the alternate delivery year
         this.altDeliveryYear = altDeliveryYear;
     }
     public int getAltDeliveryDay(){
+        // returns the alternate delivery day
         return altDeliveryDay;
     }
     public int getAltDeliveryMonth(){
+        // returns the alternate delivery month
         return altDeliveryMonth;
     }
     public int getAltDeliveryYear(){
+        // returns the alternate delivery year
         return altDeliveryYear;
     }
     public String getAltDeliveryMonthName(){
@@ -162,13 +174,16 @@ public class Order {
         }
     }
     public void setAltDateChoose(boolean altDateChoose){
+        // sets altDateChoose (if the user chooses to enter an alternate date)
         this.altDateChoose = altDateChoose;
     }
     public boolean getAltDateChoose(){
+        // returns true if the user has entered an alternate date
         return altDateChoose;
     }
     // user inputs and outputs
     public int[] userInputs(){
+        // takes user inputs and outputs an integer array with values representing the inputs
         int month = 0;
         int day = 0;
         int year = 0;
@@ -202,6 +217,7 @@ public class Order {
         return userInputs;
     }
     public void summary(){
+        // outputs a quick summary of the delivery dates depending on if they are valid or not
         System.out.println("\nProduct Name: " + getProductName());
         if (getValidDate()){
         System.out.print("\nDelivery Date: ");
@@ -216,10 +232,13 @@ public class Order {
                 System.out.println(" ");
             }
         }else{
-            System.out.println("Unfortunately your requested alternative delivery date is unavailable");
+            if(getAltDeliveryYear() != 0) {
+                System.out.println("Unfortunately your requested alternative delivery date is unavailable");
+            }
         }
     }
     public void congrats(){
+        // outputs a final summary of the order and delivery date depending on the validity of each date
         if(getValidDate() || getAltValidDate()){
             System.out.println("Order Summary: \n ");
             System.out.println("Product: ");
@@ -253,8 +272,11 @@ class Main{
     // methods
     public static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
+        // outputs a menu
         initial();
         int counter;
+        // do while loop of the creation of a myOrder object
+        // allows the user to input as many orders as they would like
         do {
             Order myOrder = new Order();
             myOrder = new Order(myOrder.userInputs());
@@ -278,7 +300,7 @@ class Main{
         System.out.println("(4) " + "System Optimizer" );
     }
     public static int reEnter(){
-        // logic for re-running if the user wants to make a change
+        // logic for re-running if the user wants to make a change during runtime
         int choice = 0;
         System.out.println("Would you like to make a change to your selections  (1)Yes  (2)No");
         choice =  input.nextInt();
