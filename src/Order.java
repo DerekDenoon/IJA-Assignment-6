@@ -203,12 +203,20 @@ public class Order {
     }
     public void summary(){
         System.out.println("\nProduct Name: " + getProductName());
+        if (getValidDate()){
         System.out.print("\nDelivery Date: ");
         System.out.println(getDeliveryMonthName() + " " + getDeliveryDay() + "," + getDeliveryYear());
-        if(getAltDateChoose()) {
-            System.out.print("Alternate Delivery Date: ");
-            System.out.println(getAltDeliveryMonthName() + " " + getAltDeliveryDay() + "," + getAltDeliveryYear());
-            System.out.println(" ");
+        }else{
+            System.out.println("Unfortunately your requested primary delivery date is unavailable");
+        }
+        if(getAltValidDate()) {
+            if (getAltDateChoose()) {
+                System.out.print("Alternate Delivery Date: ");
+                System.out.println(getAltDeliveryMonthName() + " " + getAltDeliveryDay() + "," + getAltDeliveryYear());
+                System.out.println(" ");
+            }
+        }else{
+            System.out.println("Unfortunately your requested alternative delivery date is unavailable");
         }
     }
     public void congrats(){
