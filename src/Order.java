@@ -237,6 +237,7 @@ public class Order {
                     "," + getAltDeliveryYear() + " has been confirmed");
         }else{
             System.out.println("\nDelivery not confirmed, please check back later to schedule one.");
+            System.exit(1);
         }
     }
 }
