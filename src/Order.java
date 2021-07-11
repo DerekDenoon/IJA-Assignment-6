@@ -249,7 +249,7 @@ public class Order {
                 System.out.println(getAltDeliveryMonthName() + " " + getAltDeliveryDay() + "," + getAltDeliveryYear());
             }
         }else{
-            System.out.println("Unfortunately your entered date(s) are unavailable . Please run the program again and " +
+            System.out.println("Your entered date(s) are unavailable . Please run the program again and " +
                     "select a new date");
             System.exit(1);
         }
